@@ -1,0 +1,48 @@
+syntax = "proto3";
+package quiz;
+option go_package = "./quiz";
+
+service Quiz {
+  // Get a stream of questions
+  rpc GetQuestions (QuestionRequest) returns (stream QuestionResponse) {}
+  // Give a stream of answers
+  rpc GiveAnswers (stream AnswerRequest) returns (AnswerResponse) {}
+  // Gets the player's score
+  rpc GetScore (ScoreRequest) returns (ScoreResponse) {}
+}
+
+message QuestionRequest {
+  string name = 1;
+}
+
+message QuestionResponse {
+  string question = 1;
+  int32  a = 2;
+  int32  b = 3;
+  int32  c = 4;
+  int32  d = 5;
+  int32 x = 6;
+  int32 y = 7;
+  string message = 8;
+}
+
+message AnswerRequest {
+  string name = 1;
+  int32 x = 2;
+  int32 y = 3;
+  int32 answer = 4;
+}
+
+message AnswerResponse {
+  string message = 1;
+}
+
+message ScoreRequest {
+  string name = 1;
+}
+
+message ScoreResponse {
+  string score = 1;
+  string percent = 2;
+  string message = 3;
+}
